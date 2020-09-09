@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">La Perrada De Chalo</string>
+    <string name="title_activity_main">La Perrada De Chalo</string>
+    <string name="package_name">com.aj.creative</string>
+    <string name="custom_url_scheme">com.aj.creative</string>
+</resources>

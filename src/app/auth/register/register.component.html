@@ -1,0 +1,66 @@
+<ion-header [translucent]="true" color="dark">
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form class="marg-content" [formGroup]="registerForm" (ngSubmit)="registerUser()"> 
+    <ion-item>
+      <ion-label position="floating">Names</ion-label>
+      <ion-input required="true" type="text" formControlName="names" autocapitalize="on"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Surnames</ion-label>
+      <ion-input required="true" type="text" formControlName="surnames" autocapitalize="on"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Street Address</ion-label>
+      <ion-input required="true" type="text" formControlName="street" placeholder="House number and street name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" formControlName="street_optional" placeholder="Appartment, suite, unit, etc. (optional)"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">ZIP</ion-label>
+      <ion-input required="true" type="text" formControlName="zip" (ionChange)="verifyZip()"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input required="true" type="email" formControlName="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Phone</ion-label>
+      <ion-input required="true" type="number" minlength="8" formControlName="phone">      
+      </ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input required="true" type="password" placeholder="minimum 8 characters" minlength="8" formControlName="password">      
+      </ion-input>
+    </ion-item>
+
+    <!-- Si no se ingresa un ZIP válido -->
+    <ng-container *ngIf="!isValidZip">
+      <ion-toolbar color="danger">
+        <ion-icon name="barcode-outline" slot="start" size="large"></ion-icon>
+        <ion-title>Enter a valid postal code</ion-title>
+      </ion-toolbar>
+    </ng-container>
+
+    <ion-footer class="mt-30">
+      <ion-button expand="block" color="dark" type="submit" [disabled]="!registerForm.valid || !isValidZip">Create Account</ion-button>
+    </ion-footer>
+
+  </form>
+</ion-content>

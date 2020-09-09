@@ -1,0 +1,141 @@
+<ion-header [translucent]="true" color="dark">
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button (click)="goBack()">          
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Product Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- products description -->
+  <div class="small-margin">
+    <ion-grid>
+      <ion-row>
+        <h1>{{ product.name }}</h1>
+      </ion-row>
+
+      <ion-row *ngIf="product.description">
+        <ion-text class="description-color">
+          <h2>{{ product.description }}</h2>
+        </ion-text>          
+      </ion-row>
+
+      <ion-row>
+        <ion-text color="danger">
+          <ng-container *ngIf="product.price; then onePriceBlock else twoPriceBlock"></ng-container>              
+          <ng-template #onePriceBlock><h3>$ {{ product.price }} </h3></ng-template>
+          <ng-template #twoPriceBlock><h3>$ {{ product.initial_price }} - $ {{ product.end_price }}</h3></ng-template>    
+        </ion-text>
+      </ion-row>
+
+    </ion-grid>
+  </div>
+
+  <!-- Select options of product -->
+  <div>    
+    <!-- products options (Select An Option) -->
+    <ng-container *ngIf="product.options">
+      <ion-list>
+        <ion-list-header>
+          <h2>
+            Select An Option
+          </h2>
+        </ion-list-header>
+      
+        <ion-item>
+          <ion-label>Drink</ion-label>
+          <ion-select placeholder="Select One" (ionChange)="getOptionSelected($event)">
+            <ng-container *ngFor="let option of product.options">
+              <ion-select-option value="{{ option.name }}">{{ option.name }}</ion-select-option>
+            </ng-container>
+          </ion-select>
+        </ion-item>
+        
+      </ion-list>
+    </ng-container>
+
+    <!-- Tamaños del producto -->
+    <ng-container *ngIf="product.size">
+      <ion-list>
+        <ion-list-header>
+          <h2>
+            Select An Option
+          </h2>
+        </ion-list-header>
+      
+        <ion-item>
+          <ion-label>Size</ion-label>
+          <ion-select placeholder="Select One" (ionChange)="getSizeSelected($event)">
+            <ng-container *ngFor="let size of product.size">
+              <ion-select-option value="{{ size.name }}">{{ size.name }}</ion-select-option>
+            </ng-container>
+          </ion-select>
+        </ion-item>
+        
+      </ion-list>
+    </ng-container>
+
+    <!-- Productos con sabores -->
+    <ng-container *ngIf="product.flavors">
+      <ion-list>
+        <ion-list-header>
+          <h2>
+            Select An Option
+          </h2>
+        </ion-list-header>
+      
+        <ion-item>
+          <ion-label>Flavor</ion-label>
+          <ion-select placeholder="Select One" (ionChange)="getFlavorSelected($event)">
+            <ng-container *ngFor="let flavor of product.flavors">
+              <ion-select-option value="{{ flavor }}">{{ flavor }}</ion-select-option>
+            </ng-container>
+          </ion-select>
+        </ion-item>
+        
+      </ion-list>
+    </ng-container>
+  </div>
+
+  <!-- Product observations -->
+  <div class="small-margin">
+    <ion-grid>
+      <ion-row>
+        <ion-icon name="receipt-outline"></ion-icon>
+        <ion-label>Observations</ion-label>
+      </ion-row>
+
+      <!-- Input field  -->
+      <ion-row>
+        <ion-textarea type="text" [(ngModel)]="observations" name="observations" placeholder="Ex: without onion, spicy, mayonnaise aside, etc."></ion-textarea>
+      </ion-row>
+
+    </ion-grid>
+  </div>
+
+</ion-content>
+
+<!-- Cantidad del producto y boton de agregar -->
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <!-- Cantidad de producto -->
+        <ion-col>
+          <ion-button expand="block" color="ligth">
+            <ion-chip color="ligth">
+              <ion-icon color="danger" name="remove-circle-outline" (click)="plusQuantity(false)"></ion-icon>
+              <ion-label color="dark">{{ productQuantity }}</ion-label>
+              <ion-icon color="success" name="add-circle-outline" (click)="plusQuantity(true)"></ion-icon>
+            </ion-chip>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button [disabled]="!isFull" color="danger" expand="block" (click)="addToShoppingCart()">Add      $ {{ total  | number : '1.2-2' }}</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

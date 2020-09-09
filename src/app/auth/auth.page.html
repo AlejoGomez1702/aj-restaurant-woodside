@@ -1,0 +1,60 @@
+<ion-header [translucent]="true" color="dark">
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Login or Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header>
+    <h2 class="ion-text-center title">Login</h2>
+  </ion-header>
+
+  <!-- Iniciar sesio con correo y contraseña -->
+  <form class="marg-content" [formGroup]="loginForm" (ngSubmit)="login()">
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input required="true" type="email" formControlName="email"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input required="true" type="password" formControlName="password"></ion-input>
+    </ion-item>
+
+    <ion-button class="mt-10" expand="block" color="dark" type="submit" [disabled]="!loginForm.valid">Login</ion-button>
+  </form>
+
+  <div class="ion-text-center">
+    <ion-label color="primary">¿Did you forget your password?</ion-label>
+  </div>
+
+  <div class="mt-15">
+    <h4 class="ion-text-center">--Login With Social Networks--</h4>
+  </div>
+
+  <div class="marg-btn">
+    <ion-button color="danger" expand="block" (click)="loginWithGoogle()">
+      <ion-icon slot="start" name="logo-google"></ion-icon>
+      Google
+    </ion-button>
+  </div>
+
+  <div class="marg-btn">
+    <ion-button expand="block" (click)="loginWithFacebook()">
+      <ion-icon slot="start" name="logo-facebook"></ion-icon>
+      Facebook
+    </ion-button>
+  </div>
+
+  <div>
+    <h4 class="ion-text-center">--OR--</h4>
+  </div>
+
+  <div class="ion-text-center" (click)="goToRegisterUrl()">
+    <ion-label color="primary">Create An Account</ion-label>
+  </div>
+
+</ion-content>

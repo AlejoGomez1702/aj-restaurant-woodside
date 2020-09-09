@@ -1,0 +1,92 @@
+<!-- Cabecera inicial con la info del restaurante -->
+<ion-header color="dark" *ngIf="firstHeader"> 
+  <!-- Nombre del restaurante y boton de información -->
+  <ion-toolbar color="dark">
+    <ion-buttons slot="primary">
+      <ion-button color="secondary" (click)="startInformationPage()">
+        <ion-icon name="alert-circle-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <!-- <ion-title size="small">La Perrada De Chalo</ion-title> -->
+    <ion-title size="small">{{ generalInformation.restaurant_name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Cabecera con el listado de categorias de productos disponibles -->
+<ion-header color="dark" *ngIf="!firstHeader">
+  <ion-toolbar color="dark">    
+    <ion-segment scrollable [value]="category">
+      <!-- Menu -->
+      <ng-container *ngFor="let product of products">
+        <ion-segment-button value="{{ product.category }}" (click)="scrollToCategory($event, product.category)">
+          <ion-label>{{ product.category }}</ion-label>
+        </ion-segment-button>
+      </ng-container>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header> 
+
+<!-- ***********CONTENT***********CONTENT***********CONTENT***********CONTENT*********** -->
+<ion-content [fullscreen]="true" [scrollEvents]="true" (ionScroll)="verifyTopBar($event)">
+  <!-- Imagen, tiempo, costo, pedido mínimo -->
+  <div class="cover-container">
+    <ion-img [src]="coverPageURL"></ion-img>
+    <ion-text class="cover-left-text">
+      <!-- <h1>{{ generalInformation.restaurant_name }}</h1> -->
+      <h5>Pickup {{ generalInformation.pik_time }} min | Domicile {{ generalInformation.domicile_time }} min</h5>
+      <h5>Minimum Card Payment ${{ generalInformation.minimum_with_card }}</h5>
+    </ion-text>
+  </div>
+
+  <!-- Barra de busqueda  -->
+  <ion-toolbar>
+    <ion-searchbar name="filterList" placeholder="Search products..." [(ngModel)]="filterList"></ion-searchbar>
+  </ion-toolbar>
+
+   <!-- List of Text Items -->
+   <div *ngFor="let product of products" class="mt-products">
+     <!-- Lista de cada categoria -->
+     <ion-list id="{{ product.category }}">
+      <ion-item>
+        <ion-text color="info">
+          <h3> {{ product.category }} </h3>
+        </ion-text>
+      </ion-item>
+
+      <ion-item *ngFor="let productInfo of product.products | filter:filterList" (click)="addToCart(productInfo)">
+        <ion-grid>
+          <!-- Nombre y descripción del producto -->
+          <ion-row>
+            <ion-text>
+              <h2>{{ productInfo.name }}</h2>
+              <p class="description-color">
+                {{ productInfo.description }}
+              </p>
+            </ion-text>
+          </ion-row>
+
+          <!-- Precio del producto -->
+          <ion-row>
+            <ion-text color="danger">
+              <ng-container *ngIf="productInfo.price; then onePriceBlock else twoPriceBlock"></ng-container>
+              
+              <ng-template #onePriceBlock><h3>$ {{ productInfo.price }} </h3></ng-template>
+              <ng-template #twoPriceBlock><h3>$ {{ productInfo.initial_price }} - $ {{ productInfo.end_price }}</h3></ng-template>
+            </ion-text>
+          </ion-row> 
+        </ion-grid>       
+      </ion-item>
+     </ion-list>
+    </div>
+
+    <!-- Shopping cart button -->
+    <ng-container *ngIf="shoppingCartService.sizeOfCart() > 0">
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="goToShoppingCartUrl()">
+        <ion-fab-button>
+          <ion-label>{{ shoppingCartService.sizeOfCart() }}</ion-label>
+          <ion-icon name="cart-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </ng-container>
+
+</ion-content>

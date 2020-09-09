@@ -1,0 +1,9 @@
+{
+  "name": "aj-restaurant-addresses",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "caeb73f3"
+}

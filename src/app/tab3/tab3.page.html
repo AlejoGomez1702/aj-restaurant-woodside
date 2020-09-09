@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      User Information
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <h2>
+      Names:  
+      <h4>{{ user.names }}</h4>       
+    </h2>
+  </ion-item>
+
+  <ion-item>
+    <h2>
+      Surnames:  
+      <h4>{{ user.surnames }}</h4>       
+    </h2>
+  </ion-item>
+
+  <ng-container *ngIf="user.email">
+    <ion-item>
+      <h2>
+        Email:  
+        <h4>{{ user.email }}</h4>       
+      </h2>
+    </ion-item>
+  </ng-container>
+
+  <ng-container *ngIf="user.phone">
+    <ion-item>
+      <h2>
+        Phone:  
+        <h4>{{ user.phone }}</h4>       
+      </h2>
+    </ion-item>
+  </ng-container>
+</ion-content>
+
+<ion-footer>
+  <ion-button (click)="logout()" color="dark" expand="block">Logout</ion-button>
+</ion-footer>

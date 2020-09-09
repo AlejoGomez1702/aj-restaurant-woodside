@@ -1,0 +1,7 @@
+{
+    "/*": {
+        "target": "https://us-central1-crud-ionic-c3d18.cloudfunctions.net",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

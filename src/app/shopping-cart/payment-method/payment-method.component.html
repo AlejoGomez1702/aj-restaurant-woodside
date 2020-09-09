@@ -1,0 +1,109 @@
+<ion-header [translucent]="true" color="dark">
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Payment Method</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header>
+    <h2 class="ion-text-center title">Where do we take the order?</h2>
+  </ion-header>
+
+  <div class="small-margin">
+
+    <ng-container *ngIf="acceptCard">
+      <ion-list>
+        <ion-item>
+          <ion-label>Credit Card (Stripe)</ion-label>
+          <ion-toggle [(ngModel)]="card"></ion-toggle>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Payment When Delivery Is Made</ion-label>
+        <ion-toggle [(ngModel)]="cash"></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- Opciones para el pago con tarjeta -->
+  <ng-container *ngIf="card && !cash && acceptCard">
+    <div class="ml-mr-10">
+      <form [formGroup]="paymentForm" (ngSubmit)="payWithStripe()">
+        <!-- Card number -->
+        <ion-item>
+          <ion-label position="floating">Card Number</ion-label>
+          <ion-input required="true" [value]="paymentForm.get('card_number').value | cardNumber" 
+                    formControlName="card_number" placeholder="1234 1234 1234 1234" 
+                    minlength="19" maxlength="19">
+          </ion-input>
+        </ion-item>
+    
+        <!-- Expiry date -->
+        <ion-item>
+          <ion-label>Expiry Date</ion-label>
+          <ion-item>
+            <ion-label position="floating">MM/YYYY</ion-label>
+            <ion-datetime displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" min="1994-01" max="2050-12" 
+                          formControlName="expiry_date" required="true">
+            </ion-datetime>
+          </ion-item>
+          <!-- <ion-input required="true" type="text" formControlName="expiry_date"></ion-input> -->
+        </ion-item>
+    
+        <!-- Card code (CVC) -->
+        <ion-item class="ml-mr-20">
+          <ion-label position="floating">Card Code (CVC)</ion-label>
+          <ion-input required="true" type="number" formControlName="card_code" 
+                      placeholder="CVC" min="100" maxlength="9999">
+          </ion-input>
+        </ion-item>
+  
+        <!-- CALL TO ACTION FORM -->
+        <ion-footer class="mt-25">
+          <ion-button expand="block" color="dark" type="submit" [disabled]="!paymentForm.valid">Continue</ion-button>
+        </ion-footer>
+      </form>
+    </div>
+  </ng-container>
+
+  <!-- Opciones para el pago en efectivo -->
+  <ng-container *ngIf="cash && !card">
+    <div class="txt-back-cash">
+      <form [formGroup]="cashForm" (ngSubmit)="payWithCash()">
+        <ion-item>
+          <ion-label position="floating">Enter the amount...</ion-label>
+          <ion-input required="true" type="number" formControlName="back_cash" (ionChange)="verifyAmmount()"></ion-input>
+          <ion-icon name="logo-usd" slot="start"></ion-icon> 
+        </ion-item>
+  
+        <!-- CALL TO ACTION FORM -->
+        <ion-footer class="mt-25">
+          <ion-button expand="block" color="dark" type="submit" [disabled]="!cashForm.valid || !isCorrectAmmount">Continue</ion-button>
+          <!-- Se deshabilita cuando. ==> El formulario es inválido  || El monto introducido es incorrecto  -->
+        </ion-footer>
+      </form>
+
+
+      <!-- Alerta cuando se seleccionan las dos opciones -->
+      <ng-container *ngIf="!isCorrectAmmount">
+        <div class="ion-text-center">
+          <ion-label color="danger">The entered value must be greater than the total order value</ion-label>
+        </div>    
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <!-- Alerta cuando se seleccionan las dos opciones -->
+  <ng-container *ngIf="cash && card">
+    <div class="ion-text-center">
+      <ion-label color="danger">Select Only One</ion-label>
+    </div>    
+  </ng-container>
+</ion-content>
+
