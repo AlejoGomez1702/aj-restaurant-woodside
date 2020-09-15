@@ -28,7 +28,7 @@
     </ng-container>
 
     <!-- Dirección -->
-    <ng-container *ngIf="user.addresses.length == 0">
+    <ng-container *ngIf="!user.addresses || user.addresses.length == 0">
       <ion-item>
         <ion-label position="floating">Street Address</ion-label>
         <ion-input required="true" type="text" formControlName="street" placeholder="House number and street name"></ion-input>

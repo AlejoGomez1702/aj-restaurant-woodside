@@ -6,18 +6,19 @@ export const environment = {
   production: false,
 
   firebaseConfig: {
-    apiKey: "AIzaSyDanll-Xgt9Wscv3gz0nnRN9DK1hrnkfkA",
-    authDomain: "crud-ionic-c3d18.firebaseapp.com",
-    databaseURL: "https://crud-ionic-c3d18.firebaseio.com",
-    projectId: "crud-ionic-c3d18",
-    storageBucket: "crud-ionic-c3d18.appspot.com",
-    messagingSenderId: "1000022577707",
-    appId: "1:1000022577707:web:206066f766706a84afd06e"
+      apiKey: "AIzaSyCISo1Y_-XxjzXGDDlanaZpKpfEfr0bwZw",
+      authDomain: "pollos-mario-woodside.firebaseapp.com",
+      databaseURL: "https://pollos-mario-woodside.firebaseio.com",
+      projectId: "pollos-mario-woodside",
+      storageBucket: "pollos-mario-woodside.appspot.com",
+      messagingSenderId: "740048736607",
+      appId: "1:740048736607:web:2eda941f8f51ce98d8a6ea",
+      measurementId: "G-GS1LQRR9R8"
   },
 
   stripeKey: 'pk_test_10V4EOZvv157iYvHC8wDWWzP00XfoXdFil',
 
-  stripeUrl: 'https://us-central1-crud-ionic-c3d18.cloudfunctions.net/payWithStripe'
+  paypalClientId: 'AWkTlCsx3XN40vr2epiqoBxHePXfTiwBWtwlFBC44puehPcVBYuzqAOBuFFJGbsT8u49gGLMtJ7UllGr'
 };
 
 /*

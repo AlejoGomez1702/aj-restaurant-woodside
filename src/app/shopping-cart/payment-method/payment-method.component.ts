@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 
 // Payments with Stripe.
-import { Stripe } from '@ionic-native/stripe/ngx';
+// import { Stripe } from '@ionic-native/stripe/ngx';
+import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal/ngx';
+
 import { environment } from 'src/environments/environment';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
@@ -29,12 +31,12 @@ export class PaymentMethodComponent implements OnInit
   public acceptCard: boolean;
 
   // Datos de la tarjeta con la que el cliente va pagar.
-  cardDetails = {
-    number: '4242424242424242',
-    expMonth: 12,
-    expYear: 2020,
-    cvc: '220'
-  }
+  // cardDetails = {
+  //   number: '4242424242424242',
+  //   expMonth: 12,
+  //   expYear: 2020,
+  //   cvc: '220'
+  // }
 
   // public backCash: number;
 
@@ -56,7 +58,8 @@ export class PaymentMethodComponent implements OnInit
     private authService: AuthService,
     private shoppingCartService: ShoppingCartService,
     private firebaseService: FirebaseService,
-    private stripe: Stripe,
+    // private stripe: Stripe,
+    private paypal: PayPal,
     private router: Router,
     public alertController: AlertController,
   ) 
@@ -81,68 +84,83 @@ export class PaymentMethodComponent implements OnInit
   /**
    * Pagar el pedido con tarjeta (stripe).
    */
-  payWithStripe() 
+  payWithPaypal() 
   {
-    this.stripe.setPublishableKey(environment.stripeKey);
+    let ammountNumber = (this.shoppingCartService.subtotal + this.shoppingCartService.taxTotal);
+    let ammount: string = ammountNumber.toString();
 
-    const numberCard: string = this.paymentForm.get('card_number').value;
-    const dateData = this.paymentForm.get('expiry_date').value;
-    // const correctDate = this.getMonthAndYearCard(dateData);
-    const codeCvc: string = this.paymentForm.get('card_code').value;
+    this.paypal.init({
+      PayPalEnvironmentProduction: '',
+      PayPalEnvironmentSandbox: environment.paypalClientId
+    }).then(() => {
+      this.paypal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
+        acceptCreditCards: false,
+        languageOrLocale: 'en',
+        merchantName: 'Pollos Mario Woodside'
+      })).then(() => {
+        let payment = new PayPalPayment(ammount, 'USD', 'Order Online - Pollos Mario Woodside', 'sale');
+        this.paypal.renderSinglePaymentUI(payment).then(() => {
+          this.presentSaleSuccesfull(); 
+          this.router.navigate(['tabs/tab1']);   
+        }).catch(() => {
+          console.log('Errroorrr con paypal');
+          this.router.navigate(['tabs/tab1']);  
+        });
+      })
+    })
 
-    const dateInfo = new Date(dateData);
-    // console.log('La fecha en vamos a veeerrr:');
-    // console.log(dateInfo.getFullYear());
-    // console.log(dateInfo.getMonth() + 1);
 
-    const year: number = dateInfo.getFullYear(); 
-    const month: number = dateInfo.getMonth() + 1;
+
+    // this.stripe.setPublishableKey(environment.stripeKey);
+
+    // const numberCard: string = this.paymentForm.get('card_number').value;
+    // const dateData = this.paymentForm.get('expiry_date').value;
+    // // const correctDate = this.getMonthAndYearCard(dateData);
+    // const codeCvc: string = this.paymentForm.get('card_code').value;
+
+    // const dateInfo = new Date(dateData);
+    // // console.log('La fecha en vamos a veeerrr:');
+    // // console.log(dateInfo.getFullYear());
+    // // console.log(dateInfo.getMonth() + 1);
+
+    // const year: number = dateInfo.getFullYear(); 
+    // const month: number = dateInfo.getMonth() + 1;
 
     //*************IMPORTANTE*************IMPORTANTE*************IMPORTANTE************* */
     /**
      * Información verdadera del usuario.
      */
-    this.cardDetails = {
-      number: numberCard,
-      expMonth: month,
-      expYear: year,
-      cvc: codeCvc
-    };
-
-    /**
-     * Información para realizar pruebas.
-     */
     // this.cardDetails = {
-    //   number: '4242424242424242',
-    //   expMonth: 12,
-    //   expYear: 2020,
-    //   cvc: '220'
+    //   number: numberCard,
+    //   expMonth: month,
+    //   expYear: year,
+    //   cvc: codeCvc
     // };
 
-    this.stripe.createCardToken(this.cardDetails)
-      .then(token => {
-        console.log(token);
-        // Se multiplica por 100 porque la api de stripe acepta en centavos de dolar.
-        let ammount: number = (this.shoppingCartService.subtotal + this.shoppingCartService.taxTotal) * 100;
-        ammount = Math.round((ammount + Number.EPSILON) * 100) / 100; // Devolviendo solo 2 decimales.
-        this.makePayment(token.id, ammount)
-        .then((data) => {
-          console.log(data);
-          // this.shoppingCartService.refreshCart();  *********SOLUCIONAR*********
-          this.shoppingCartService.registerSale()
-          .then(() => {
-            // this.shoppingCartService.refreshCart();    // ***********solucionar
-            this.presentSaleSuccesfull(); 
-            this.router.navigate(['tabs/tab1']);   
-          }).catch((error) => {
-            console.log(error);
-          });
-        });
-      })
-      .catch(error => {
-        console.log(error);
-        this.router.navigate(['tabs/tab1']); 
-      });
+    // this.stripe.createCardToken(this.cardDetails)
+    //   .then(token => {
+    //     // console.log(token);
+    //     // Se multiplica por 100 porque la api de stripe acepta en centavos de dolar.
+    //     let ammount: number = (this.shoppingCartService.subtotal + this.shoppingCartService.taxTotal) * 100;
+    //     ammount = Math.round((ammount + Number.EPSILON) * 100) / 100; // Devolviendo solo 2 decimales.
+    //     this.makePayment(token.id, ammount)
+    //     .then((data) => {
+    //       console.log(data);
+    //       // this.shoppingCartService.refreshCart();  *********SOLUCIONAR*********
+    //       this.shoppingCartService.registerSale()
+    //       .then(() => {
+    //         // this.shoppingCartService.refreshCart();    // ***********solucionar
+    //         this.presentSaleSuccesfull(); 
+    //         this.router.navigate(['tabs/tab1']);   
+    //       }).catch((error) => {
+    //         console.log(error);
+    //       });
+    //     });
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //     this.router.navigate(['tabs/tab1']); 
+    //   });
   }
 
   /**

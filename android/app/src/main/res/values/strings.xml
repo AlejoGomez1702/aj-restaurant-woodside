@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Pollos Mario Woodside</string>
+    <string name="title_activity_main">Pollos Mario Woodside</string>
+    <string name="package_name">com.aj.woodside</string>
+    <string name="custom_url_scheme">com.aj.woodside</string>
+</resources>

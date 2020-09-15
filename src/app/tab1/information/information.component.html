@@ -10,7 +10,7 @@
 
 <ion-content>
   <div>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6044.59145330197!2d-73.884017!3d40.75552!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb454d86176734933!2sLa%20Perrada%20De%20Chalo!5e0!3m2!1ses-419!2sco!4v1594832088809!5m2!1ses-419!2sco" height="180" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0" class="map-width"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.7859180579035!2d-73.90459598459407!3d40.74473597932829!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25f1d6b0c876b%3A0xe49b7ebb102f0996!2sPollos%20Mario%20Woodside!5e0!3m2!1ses!2sco!4v1599615920481!5m2!1ses!2sco" height="180" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0" class="map-width"></iframe>
   </div>
   
 
@@ -21,28 +21,11 @@
     <ion-grid>
       <ion-row>
         <ion-icon name="card"></ion-icon>
-        <ion-label>Credit Card (Stripe)</ion-label>
+        <ion-label>Online</ion-label>
       </ion-row>
       <ion-row>
         <ion-col>
           <ion-img [src]="paymentsImages[0]"></ion-img>
-        </ion-col>
-        <ion-col>
-          <ion-img [src]="paymentsImages[1]"></ion-img>
-        </ion-col>
-        <ion-col>
-          <ion-img [src]="paymentsImages[2]"></ion-img>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-img [src]="paymentsImages[3]"></ion-img>
-        </ion-col>
-        <ion-col>
-          <ion-img [src]="paymentsImages[4]"></ion-img>
-        </ion-col>
-        <ion-col>
-          <ion-img [src]="paymentsImages[5]"></ion-img>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -56,7 +39,7 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-img [src]="paymentsImages[6]"></ion-img>
+          <ion-img [src]="paymentsImages[1]"></ion-img>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -71,8 +54,26 @@
     <ion-item>
       <ion-grid>
         <ion-row>
+          <ion-col><ion-label>Monday</ion-label></ion-col>
+          <ion-col><ion-label>11:00 A.M - 9:00 P.M</ion-label></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col><ion-label>Tuesday</ion-label></ion-col>
+          <ion-col><ion-label>11:00 A.M - 9:00 P.M</ion-label></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item>
+      <ion-grid>
+        <ion-row>
           <ion-col><ion-label>Wednesday</ion-label></ion-col>
-          <ion-col><ion-label>11:00 A.M - 1:00 A.M</ion-label></ion-col>
+          <ion-col><ion-label>11:00 A.M - 9:00 P.M</ion-label></ion-col>
         </ion-row>
       </ion-grid>
     </ion-item>
@@ -81,7 +82,7 @@
       <ion-grid>
         <ion-row>
           <ion-col><ion-label>Thursday</ion-label></ion-col>
-          <ion-col><ion-label>11:00 A.M - 2:00 A.M</ion-label></ion-col>
+          <ion-col><ion-label>11:00 A.M - 9:00 P.M</ion-label></ion-col>
         </ion-row>
       </ion-grid>
     </ion-item>
@@ -90,7 +91,7 @@
       <ion-grid>
         <ion-row>
           <ion-col><ion-label>Friday</ion-label></ion-col>
-          <ion-col><ion-label>11:00 A.M - 4:00 A.M</ion-label></ion-col>
+          <ion-col><ion-label>11:00 A.M - 10:00 P.M</ion-label></ion-col>
         </ion-row>
       </ion-grid>
     </ion-item>
@@ -99,7 +100,7 @@
       <ion-grid>
         <ion-row>
           <ion-col><ion-label>Saturday</ion-label></ion-col>
-          <ion-col><ion-label>11:00 A.M - 4:00 A.M</ion-label></ion-col>
+          <ion-col><ion-label>11:00 A.M - 10:00 P.M</ion-label></ion-col>
         </ion-row>
       </ion-grid>
     </ion-item>
@@ -108,24 +109,23 @@
       <ion-grid>
         <ion-row>
           <ion-col><ion-label>Sunday</ion-label></ion-col>
-          <ion-col><ion-label>11:00 A.M - 1:00 A.M</ion-label></ion-col>
+          <ion-col><ion-label>11:00 A.M - 9:00 P.M</ion-label></ion-col>
         </ion-row>
       </ion-grid>
     </ion-item>
 
   </ion-list>
 
-  <ion-item class="marg-top">
+  <!-- <ion-item class="marg-top">
     <ion-label class="txt-bold txt-large txt-center" color="primary">FREE DELIVERY FROM 3PM TO 11 PM</ion-label>    
-  </ion-item>
+  </ion-item> -->
 
   <ion-item class="marg-top">
-    <ion-label class="txt-bold txt-x-large txt-center">Telephone Contacts</ion-label>    
+    <ion-label class="txt-bold txt-x-large txt-center">Telephone Contact</ion-label>    
   </ion-item>
 
   <ion-list>
-    <ion-item><ion-label class="txt-center">718-639-6677</ion-label></ion-item>
-    <ion-item><ion-label class="txt-center">718-639-1030</ion-label></ion-item>
+    <ion-item><ion-label class="txt-center">718-205-9898</ion-label></ion-item>
   </ion-list>
 
 </ion-content>

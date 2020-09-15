@@ -75,7 +75,7 @@ export class FirebaseService
   initInformation()
   {
     this.initGeneralInformation();
-    this.loadCoverFile();
+    // this.loadCoverFile();
     this.initAllProducts();    
   }
 

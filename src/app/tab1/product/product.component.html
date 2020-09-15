@@ -11,6 +11,11 @@
 <ion-content>
   <!-- products description -->
   <div class="small-margin">
+
+    <ion-item>
+      <ion-img [src]="product.image_url"></ion-img>
+    </ion-item>
+
     <ion-grid>
       <ion-row>
         <h1>{{ product.name }}</h1>
