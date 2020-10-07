@@ -74,6 +74,31 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /** Rojo caracteristico de pollos mario woodside **/
+  --ion-color-red-woodside: #ad0101;
+  --ion-color-red-woodside-rgb: 173,1,1;
+  --ion-color-red-woodside-contrast: #ffffff;
+  --ion-color-red-woodside-contrast-rgb: 255,255,255;
+  --ion-color-red-woodside-shade: #980101;
+  --ion-color-red-woodside-tint: #b51a1a;
+
+  // Azul de facebook
+  --ion-color-blue-facebook: #3b5998;
+  --ion-color-blue-facebook-rgb: 59,89,152;
+  --ion-color-blue-facebook-contrast: #ffffff;
+  --ion-color-blue-facebook-contrast-rgb: 255,255,255;
+  --ion-color-blue-facebook-shade: #344e86;
+  --ion-color-blue-facebook-tint: #4f6aa2;
+
+  // Blanco
+  --ion-color-white: #ffffff;
+  --ion-color-white-rgb: 255,255,255;
+  --ion-color-white-contrast: #000000;
+  --ion-color-white-contrast-rgb: 0,0,0;
+  --ion-color-white-shade: #e0e0e0;
+  --ion-color-white-tint: #ffffff;
+
 }
 
 @media (prefers-color-scheme: dark) {

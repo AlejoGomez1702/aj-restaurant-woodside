@@ -1,0 +1,29 @@
+<ion-header color="red-woodside">
+  <ion-toolbar color="red-woodside" class="ion-text-center">    
+    <ion-title >POLLOS MARIO WOODSIDE</ion-title>
+  </ion-toolbar>
+</ion-header> 
+
+<ion-content>
+  <div>
+    <ion-img src="assets/img/initial.jpg"></ion-img>
+  </div>
+
+  <div>
+    <ion-button color="red-woodside" (click)="goToPage(1)" expand="full">
+      <ion-icon slot="start" name="person-outline"></ion-icon>
+      Log in
+    </ion-button>
+
+    <ion-button color="red-woodside" (click)="goToPage(2)" expand="full">
+      <ion-icon slot="start" name="fast-food-outline"></ion-icon>
+      Delivery
+    </ion-button>
+
+    <ion-button color="red-woodside" (click)="goToPage(3)" expand="full">
+      <ion-icon slot="start" name="images-outline"></ion-icon>
+      Gallery
+    </ion-button>
+  </div>
+  
+</ion-content>

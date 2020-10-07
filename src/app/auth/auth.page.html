@@ -1,16 +1,34 @@
-<ion-header [translucent]="true" color="dark">
-  <ion-toolbar color="dark">
+<ion-header color="red-woodside">
+  <ion-toolbar color="red-woodside">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Login or Register</ion-title>
+    <!-- <ion-title>Login or Register</ion-title> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-header>
+  <!-- <ion-header>
     <h2 class="ion-text-center title">Login</h2>
-  </ion-header>
+  </ion-header> -->
+
+  <div class="marg-btn">
+    <ion-button color="blue-facebook" expand="block" (click)="loginWithFacebook()">
+      <ion-icon slot="start" name="logo-facebook"></ion-icon>
+      <ion-text color="white" class="ion-text-capitalize">
+        <h6>Continue With Facebook</h6>
+      </ion-text>      
+    </ion-button>
+  </div>
+
+  <div class="marg-btn">
+    <ion-button color="danger" expand="block" (click)="loginWithGoogle()">
+      <ion-icon slot="start" name="logo-google"></ion-icon>
+      <ion-text color="white" class="ion-text-capitalize">
+        <h6>Continue With Google</h6>
+      </ion-text>       
+    </ion-button>
+  </div>
 
   <!-- Iniciar sesio con correo y contraseña -->
   <form class="marg-content" [formGroup]="loginForm" (ngSubmit)="login()">
@@ -21,40 +39,33 @@
   
     <ion-item>
       <ion-label position="floating">Password</ion-label>
-      <ion-input required="true" type="password" formControlName="password"></ion-input>
+      <ion-input required="true" [type]="showPassword ? 'text' : 'password'" formControlName="password"></ion-input>
+      <ion-icon slot="end" [name]="passwordToggleIcon" (click)="changeStatePassword()"></ion-icon>
     </ion-item>
 
-    <ion-button class="mt-10" expand="block" color="dark" type="submit" [disabled]="!loginForm.valid">Login</ion-button>
+    <!-- <ion-item> -->
+      <ion-button class="mt-10 btn-size" expand="block" color="red-woodside" type="submit" [disabled]="!loginForm.valid">Log in</ion-button>
+    <!-- </ion-item>     -->
   </form>
 
   <div class="ion-text-center">
-    <ion-label color="primary">¿Did you forget your password?</ion-label>
+    <ion-label color="red-woodside">¿Did you forget your password?</ion-label>
   </div>
 
-  <div class="mt-15">
+  <!-- <div class="mt-15">
     <h4 class="ion-text-center">--Login With Social Networks--</h4>
-  </div>
-
-  <div class="marg-btn">
-    <ion-button color="danger" expand="block" (click)="loginWithGoogle()">
-      <ion-icon slot="start" name="logo-google"></ion-icon>
-      Google
-    </ion-button>
-  </div>
-
-  <div class="marg-btn">
-    <ion-button expand="block" (click)="loginWithFacebook()">
-      <ion-icon slot="start" name="logo-facebook"></ion-icon>
-      Facebook
-    </ion-button>
-  </div>
+  </div> -->
 
   <div>
     <h4 class="ion-text-center">--OR--</h4>
   </div>
 
   <div class="ion-text-center" (click)="goToRegisterUrl()">
-    <ion-label color="primary">Create An Account</ion-label>
+    <ion-label color="red-woodside">Create An Account</ion-label>
+  </div>
+
+  <div>
+    <ion-img src="assets/img/pollo.png" alt="Chicken Woodside"></ion-img>
   </div>
 
 </ion-content>

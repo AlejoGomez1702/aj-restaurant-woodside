@@ -16,11 +16,18 @@ export class AuthPage implements OnInit
     password: new FormControl('')
   });
 
+  // Se quiere mostrar la contraseña o no.
+  public showPassword: boolean;
+  public passwordToggleIcon: string;
+
   constructor(
     private authService: AuthService,
     private router: Router 
   ) 
-  { }
+  { 
+    this.showPassword = false;
+    this.passwordToggleIcon = 'eye';
+  }
 
   ngOnInit() 
   {
@@ -58,14 +65,23 @@ export class AuthPage implements OnInit
     this.authService.loginWithFacebook();
   }
 
-
   /**
-   * Iniciar Sesión con google.
+   * Permite mostrar o no la contraseña ingresada por el usuario.
    */
-  // signInWithGoogle()
-  // {
-  //   this.authService.googleSignin();
-  // }
+  changeStatePassword(): void
+  {
+    // Si no se muestra la contraseña y se quiere mostrar entonces...
+    if(!this.showPassword)
+    {
+      this.showPassword = true;
+      this.passwordToggleIcon = 'eye-off';
+    }
+    else
+    {
+      this.showPassword = false;
+      this.passwordToggleIcon = 'eye';
+    }
+  }
 
   /**
    * Redirige a la página para registrar un usuario.

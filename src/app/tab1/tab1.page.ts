@@ -72,7 +72,7 @@ export class Tab1Page implements OnInit
    */
   startInformationPage()
   {
-    this.router.navigate(['/tabs/tab1/information'])
+    this.router.navigate(['/woodside/tabs/tab1/information'])
   }
 
   /**

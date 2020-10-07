@@ -1,9 +1,14 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { InitialComponent } from './tab1/initial/initial.component';
 
 const routes: Routes = [
   {
     path: '',
+    component: InitialComponent
+  },
+  {
+    path: 'woodside',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {

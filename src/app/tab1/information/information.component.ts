@@ -26,7 +26,7 @@ export class InformationComponent
    */
   goBack()
   {
-    this.router.navigate(['/tabs/tab1'])
+    this.router.navigate(['/woodside/tabs/tab1'])
   }
 
 }

@@ -1,20 +1,20 @@
 <!-- Cabecera inicial con la info del restaurante -->
-<ion-header color="dark" *ngIf="firstHeader"> 
+<ion-header color="red-woodside" *ngIf="firstHeader"> 
   <!-- Nombre del restaurante y boton de información -->
-  <ion-toolbar color="dark">
+  <ion-toolbar color="red-woodside">
     <ion-buttons slot="primary">
-      <ion-button color="secondary" (click)="startInformationPage()">
+      <ion-button color="warning" (click)="startInformationPage()">
         <ion-icon name="alert-circle-outline" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
     <!-- <ion-title size="small">La Perrada De Chalo</ion-title> -->
-    <ion-title size="small">{{ generalInformation.restaurant_name }}</ion-title>
+    <ion-title size="small" class="ion-text-center" >{{ generalInformation.restaurant_name }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <!-- Cabecera con el listado de categorias de productos disponibles -->
-<ion-header color="dark" *ngIf="!firstHeader">
-  <ion-toolbar color="dark">    
+<ion-header color="red-woodside" *ngIf="!firstHeader">
+  <ion-toolbar color="red-woodside">    
     <ion-segment scrollable [value]="category">
       <!-- Menu -->
       <ng-container *ngFor="let product of products">
@@ -38,6 +38,9 @@
     </ion-text>
   </div>
 
+  <ion-item-divider color="red-woodside">
+  </ion-item-divider>
+
   <!-- Barra de busqueda  -->
   <ion-toolbar>
     <ion-searchbar name="filterList" placeholder="Search products..." [(ngModel)]="filterList"></ion-searchbar>
@@ -48,17 +51,24 @@
      <!-- Lista de cada categoria -->
      <ion-list id="{{ product.category }}">
       <ion-item>
-        <ion-text color="info">
+        <ion-text color="dark">
           <h3> {{ product.category }} </h3>
         </ion-text>
       </ion-item>
 
       <ion-item *ngFor="let productInfo of product.products | filter:filterList" (click)="addToCart(productInfo)">
-        <ion-grid>
+        <!-- Imagen del producto -->
+        <ng-container *ngIf="productInfo.image_url">
+          <ion-thumbnail slot="end">
+            <img src="{{ productInfo.image_url }}">
+          </ion-thumbnail>
+        </ng-container>
+
+        <ion-grid>          
           <!-- Nombre y descripción del producto -->
           <ion-row>
-            <ion-text>
-              <h2>{{ productInfo.name }}</h2>
+            <ion-text color="red-woodside">
+              <h3>{{ productInfo.name }}</h3>
               <p class="description-color">
                 {{ productInfo.description }}
               </p>
@@ -67,12 +77,14 @@
 
           <!-- Precio del producto -->
           <ion-row>
-            <ion-text color="danger">
-              <ng-container *ngIf="productInfo.price; then onePriceBlock else twoPriceBlock"></ng-container>
-              
-              <ng-template #onePriceBlock><h3>$ {{ productInfo.price }} </h3></ng-template>
-              <ng-template #twoPriceBlock><h3>$ {{ productInfo.initial_price }} - $ {{ productInfo.end_price }}</h3></ng-template>
-            </ion-text>
+            <ion-col>
+              <ion-text color="red-woodside">
+                <ng-container *ngIf="productInfo.price; then onePriceBlock else twoPriceBlock"></ng-container>
+                
+                <ng-template #onePriceBlock><h3>$ {{ productInfo.price }} </h3></ng-template>
+                <ng-template #twoPriceBlock><h3>$ {{ productInfo.initial_price }} - $ {{ productInfo.end_price }}</h3></ng-template>
+              </ion-text>
+            </ion-col>
           </ion-row> 
         </ion-grid>       
       </ion-item>

@@ -84,7 +84,7 @@ export class ShoppingCartService
   addProductToCart(product: Product)
   {
     this.tempProduct = product;
-    this.router.navigate(['/tabs/tab1/addProduct'])
+    this.router.navigate(['/woodside/tabs/tab1/addProduct'])
   }
 
   /**

@@ -148,7 +148,7 @@ export class ProductComponent implements OnInit
    */
   goBack()
   {
-    this.router.navigate(['/tabs/tab1']);
+    this.router.navigate(['/woodside/tabs/tab1']);
   }
 
   // *******************  Datos iniciales para el constructor *********************
