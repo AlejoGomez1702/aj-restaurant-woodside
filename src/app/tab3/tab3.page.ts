@@ -35,7 +35,7 @@ export class Tab3Page
       this.firebaseService.user = null;
       this.firebaseService.updateUserAuthState();
       this.presentSaleSuccesfull();
-      this.router.navigate(['/tabs/tab1']);
+      this.router.navigate(['/woodside/tabs/tab1']);
     });
   }
 

@@ -1,5 +1,5 @@
-<ion-header [translucent]="true" color="dark">
-  <ion-toolbar color="dark">
+<ion-header [translucent]="true" color="red-woodside">
+  <ion-toolbar color="red-woodside">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -9,13 +9,13 @@
 
 <ion-content>
   <ion-header>
-    <h2 class="ion-text-center title">Where do we take the order?</h2>
+    <h2 class="ion-text-center title red-woodside">Where do we take the order?</h2>
   </ion-header>
 
   <ion-list>
     <ion-item> 
       <ion-label>Pickup</ion-label>
-      <ion-toggle [(ngModel)]="pickup"></ion-toggle>
+      <ion-toggle color="red-woodside" [(ngModel)]="pickup"></ion-toggle>
     </ion-item>
   </ion-list>
 
@@ -32,13 +32,13 @@
           <ng-container *ngIf="address.street_optional">
             <ion-label class="description-color">{{ address.street_optional }}</ion-label>
           </ng-container>
-          <ion-toggle [ngModel]="addresses[i]"></ion-toggle>
+          <ion-toggle color="red-woodside" [ngModel]="addresses[i]"></ion-toggle>
         </ion-item>
       </ng-container>
     </ion-list>
   
     <ion-grid class="mt-5">
-      <ion-button expand="full" color="dark" (click)="goToaddUserAddress()">
+      <ion-button expand="full" color="warning" (click)="goToaddUserAddress()">
         Add Another Address
         <ion-icon name="add-outline" slot="end"></ion-icon>
       </ion-button>
@@ -50,7 +50,7 @@
 <!-- Footer -->
 <!-- Se deshabilita cuando ==> (pikup = False) y (address = False) -->
 <ion-footer>
-  <ion-button expand="block" color="danger" [disabled]="!isAddressSelected && !pickup" (click)="procesAddress()">
+  <ion-button expand="block" color="red-woodside" [disabled]="!isAddressSelected && !pickup" (click)="procesAddress()">
     Continue
   </ion-button>
 </ion-footer>

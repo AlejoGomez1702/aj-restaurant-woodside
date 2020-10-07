@@ -101,10 +101,10 @@ export class PaymentMethodComponent implements OnInit
         let payment = new PayPalPayment(ammount, 'USD', 'Order Online - Pollos Mario Woodside', 'sale');
         this.paypal.renderSinglePaymentUI(payment).then(() => {
           this.presentSaleSuccesfull(); 
-          this.router.navigate(['tabs/tab1']);   
+          this.router.navigate(['woodside/tabs/tab1']);   
         }).catch(() => {
           console.log('Errroorrr con paypal');
-          this.router.navigate(['tabs/tab1']);  
+          this.router.navigate(['woodside/tabs/tab1']);  
         });
       })
     })
@@ -191,7 +191,7 @@ export class PaymentMethodComponent implements OnInit
     .then(() => {
       // this.shoppingCartService.refreshCart();    // ***********solucionar
       this.presentSaleSuccesfull(); 
-      this.router.navigate(['tabs/tab1']);   
+      this.router.navigate(['woodside/tabs/tab1']);   
     }).catch((error) => {
       console.log(error);
     });

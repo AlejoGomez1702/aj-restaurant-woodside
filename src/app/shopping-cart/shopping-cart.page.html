@@ -1,5 +1,5 @@
-<ion-header [translucent]="true" color="dark">
-  <ion-toolbar color="dark">
+<ion-header [translucent]="true" color="red-woodside">
+  <ion-toolbar color="red-woodside">
     <ion-buttons slot="start">
       <ion-back-button (click)="goBack()">          
       </ion-back-button>
@@ -10,7 +10,7 @@
 
 <ion-content>
   <ion-header>
-    <h2 class="ion-text-center title">My Order</h2>
+    <h2 class="ion-text-center title" style="color: #ad0101;">My Order</h2>
   </ion-header>
 
   <ng-container *ngIf="!isEmpty">
@@ -41,7 +41,7 @@
   <ng-container *ngIf="!meetsMinimum">
     <ion-toolbar color="primary">
       <ion-icon name="card-outline" slot="start" size="large"></ion-icon>
-      <ion-label>The minimum payment by card is: ${{ minimumOrderWithCard }}</ion-label>
+      <ion-label>The minimum payment by PayPal is: ${{ minimumOrderWithCard }}</ion-label>
     </ion-toolbar>
   </ng-container>
 
@@ -83,7 +83,7 @@
   </ion-list>
 
   <ion-grid class="mt-5">
-    <ion-button expand="full" color="dark" (click)="goBack()">
+    <ion-button expand="full" color="warning" (click)="goBack()">
       Add More Food
       <ion-icon name="fast-food-outline" slot="end"></ion-icon>
     </ion-button>
@@ -92,7 +92,7 @@
 
 <!-- Footer -->
 <ion-footer>
-  <ion-button [disabled]="isEmpty" expand="block" color="danger" (click)="goToAuthUser(false)">
+  <ion-button [disabled]="isEmpty" expand="block" color="red-woodside" (click)="goToAuthUser(false)">
     Continue
   </ion-button>
 </ion-footer>

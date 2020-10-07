@@ -1,5 +1,5 @@
-<ion-header [translucent]="true" color="dark">
-  <ion-toolbar color="dark">
+<ion-header [translucent]="true" color="red-woodside">
+  <ion-toolbar color="red-woodside">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -18,7 +18,7 @@
       <ion-list>
         <ion-item>
           <ion-label>Online With PayPal</ion-label>
-          <ion-toggle [(ngModel)]="card"></ion-toggle>
+          <ion-toggle color="red-woodside" [(ngModel)]="card"></ion-toggle>
         </ion-item>
       </ion-list>
     </ng-container>
@@ -26,7 +26,7 @@
     <ion-list>
       <ion-item>
         <ion-label>Payment When Delivery Is Made</ion-label>
-        <ion-toggle [(ngModel)]="cash"></ion-toggle>
+        <ion-toggle color="red-woodside" [(ngModel)]="cash"></ion-toggle>
       </ion-item>
     </ion-list>
   </div>
@@ -37,7 +37,7 @@
       <form [formGroup]="paymentForm" (ngSubmit)="payWithPaypal()">  
         <!-- CALL TO ACTION FORM -->
         <ion-footer class="mt-25">
-          <ion-button expand="block" color="dark" type="submit">Continue</ion-button>
+          <ion-button expand="block" color="red-woodside" type="submit">Continue</ion-button>
         </ion-footer>
       </form>
     </div>
@@ -55,7 +55,7 @@
   
         <!-- CALL TO ACTION FORM -->
         <ion-footer class="mt-25">
-          <ion-button expand="block" color="dark" type="submit" [disabled]="!cashForm.valid || !isCorrectAmmount">Continue</ion-button>
+          <ion-button expand="block" color="red-woodside" type="submit" [disabled]="!cashForm.valid || !isCorrectAmmount">Continue</ion-button>
           <!-- Se deshabilita cuando. ==> El formulario es inválido  || El monto introducido es incorrecto  -->
         </ion-footer>
       </form>

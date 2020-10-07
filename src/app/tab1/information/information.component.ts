@@ -18,7 +18,7 @@ export class InformationComponent
   ) 
   {
     this.paymentsImages = this.storageFirebase.paymentsImages;
-    console.log(this.storageFirebase.paymentsImages);
+    // console.log(this.storageFirebase.paymentsImages);
   }
 
   /**

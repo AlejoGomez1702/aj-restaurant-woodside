@@ -1,9 +1,9 @@
-<ion-header [translucent]="true" color="dark">
-  <ion-toolbar color="dark">
+<ion-header [translucent]="true" color="red-woodside">
+  <ion-toolbar color="red-woodside">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Add Address</ion-title>
+    <ion-title class="ion-text-center" color="warning">Add Address</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -30,14 +30,14 @@
 
     <!-- Si no se ingresa un ZIP válido -->
     <ng-container *ngIf="!isValidZip">
-      <ion-toolbar color="danger" class="mt-10">
+      <ion-toolbar color="warning" class="mt-10">
         <ion-icon name="barcode-outline" slot="start" size="large"></ion-icon>
         <ion-title>Enter a valid postal code</ion-title> 
       </ion-toolbar>
     </ng-container>
 
     <ion-footer class="mt-30">
-      <ion-button expand="block" color="dark" type="submit" [disabled]="!addressForm.valid || !isValidZip">Add Address</ion-button>
+      <ion-button expand="block" color="red-woodside" type="submit" [disabled]="!addressForm.valid || !isValidZip">Add Address</ion-button>
     </ion-footer>
 
   </form>

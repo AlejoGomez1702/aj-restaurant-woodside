@@ -1,5 +1,5 @@
-<ion-header [translucent]="true" color="dark">
-  <ion-toolbar color="dark">
+<ion-header [translucent]="true" color="red-woodside">
+  <ion-toolbar color="red-woodside">
     <ion-buttons slot="start">
       <ion-back-button (click)="goBack()">          
       </ion-back-button>
@@ -28,7 +28,7 @@
       </ion-row>
 
       <ion-row>
-        <ion-text color="danger">
+        <ion-text color="red-woodside">
           <ng-container *ngIf="product.price; then onePriceBlock else twoPriceBlock"></ng-container>              
           <ng-template #onePriceBlock><h3>$ {{ product.price }} </h3></ng-template>
           <ng-template #twoPriceBlock><h3>$ {{ product.initial_price }} - $ {{ product.end_price }}</h3></ng-template>    
@@ -138,7 +138,7 @@
           </ion-button>
         </ion-col>
         <ion-col>
-          <ion-button [disabled]="!isFull" color="danger" expand="block" (click)="addToShoppingCart()">Add      $ {{ total  | number : '1.2-2' }}</ion-button>
+          <ion-button [disabled]="!isFull" color="red-woodside" expand="block" (click)="addToShoppingCart()">Add      $ {{ total  | number : '1.2-2' }}</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -54,6 +54,7 @@ export class Tab1Page implements OnInit
   {
     this.coverPageURL = this.firebaseService.coverPageURL;
     this.products = this.firebaseService.products;  
+    // console.log(this.products);
     this.generalInformation = this.firebaseService.generalInformation;
   }
 

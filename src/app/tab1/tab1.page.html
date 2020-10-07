@@ -29,17 +29,52 @@
 <!-- ***********CONTENT***********CONTENT***********CONTENT***********CONTENT*********** -->
 <ion-content [fullscreen]="true" [scrollEvents]="true" (ionScroll)="verifyTopBar($event)">
   <!-- Imagen, tiempo, costo, pedido mínimo -->
-  <div class="cover-container">
+  <!-- <div class="cover-container">
     <ion-img [src]="coverPageURL"></ion-img>
     <ion-text class="cover-left-text">
-      <!-- <h1>{{ generalInformation.restaurant_name }}</h1> -->
       <h5>Pickup {{ generalInformation.pik_time }} min | Domicile {{ generalInformation.domicile_time }} min</h5>
       <h5>Minimum Card Payment ${{ generalInformation.minimum_with_card }}</h5>
     </ion-text>
+  </div> -->
+
+  <!-- Categorias mas significativas iniciales -->
+  <div class="cover-container">
+    <ion-grid fixed>
+      <ion-row>
+        <!-- Deayunos -->
+        <ion-col size="3" (click)="scrollToCategory($event, 'BREAKFAST')">
+          <ion-thumbnail class="ml-thumbnail">
+            <img src="assets/img/main/breakfast.jpg" />
+          </ion-thumbnail>
+          <ion-label class="lbl-size">BREAKFAST</ion-label>
+        </ion-col>
+        <!-- Pollo -->
+        <ion-col size="3" (click)="scrollToCategory($event, 'CHICKEN')">
+          <ion-thumbnail class="ml-thumbnail">
+            <img src="assets/img/main/chicken.jpg" />
+          </ion-thumbnail>
+          <ion-label class="lbl-size">CHICKEN</ion-label>
+        </ion-col>
+        <!-- Comida de mar -->
+        <ion-col size="3" (click)="scrollToCategory($event, 'SEAFOOD')">
+          <ion-thumbnail class="ml-thumbnail">
+            <img src="assets/img/main/seafood.png" />
+          </ion-thumbnail>
+          <ion-label class="lbl-size">SEAFOOD</ion-label>
+        </ion-col>
+        <!-- Comida tipica -->
+        <ion-col size="3" (click)="scrollToCategory($event, 'TYPICAL DISHES')">
+          <ion-thumbnail class="ml-thumbnail">
+            <img src="assets/img/main/typical.jpg" />
+          </ion-thumbnail>
+          <ion-label class="lbl-size">TYPICAL</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 
-  <ion-item-divider color="red-woodside">
-  </ion-item-divider>
+  <!-- Divisor entre el buscador y categorias iniciales -->
+  <hr class="horizontal-line">
 
   <!-- Barra de busqueda  -->
   <ion-toolbar>
@@ -94,7 +129,7 @@
     <!-- Shopping cart button -->
     <ng-container *ngIf="shoppingCartService.sizeOfCart() > 0">
       <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="goToShoppingCartUrl()">
-        <ion-fab-button>
+        <ion-fab-button color="warning">
           <ion-label>{{ shoppingCartService.sizeOfCart() }}</ion-label>
           <ion-icon name="cart-outline"></ion-icon>
         </ion-fab-button>
