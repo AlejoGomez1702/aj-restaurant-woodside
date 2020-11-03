@@ -30,6 +30,13 @@
     </ion-button>
   </div>
 
+  <div class="marg-btn">
+    <ion-button color="dark" expand="block" (click)="openAppleSignIn()" *ngIf = "showAppleSignIn">
+      <ion-icon expand="full" name="logo-apple" slot="start"></ion-icon>
+      Apple
+    </ion-button>
+  </div>
+
   <!-- Iniciar sesio con correo y contraseña -->
   <form class="marg-content" [formGroup]="loginForm" (ngSubmit)="login()">
     <ion-item>

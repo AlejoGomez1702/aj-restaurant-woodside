@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { first } from 'rxjs/operators';
 import { RegisterForm } from '../interfaces/RegisterForm';
 import { LoginForm } from '../interfaces/LoginForm';
 import { FirebaseService } from './firebase.service';
 import { UserAuth } from '../interfaces/UserAuth';
+import * as firebase from 'firebase';
  
 @Injectable({
   providedIn: 'root'
@@ -102,6 +103,44 @@ export class AuthService
     });
     // return this.authLogin(new auth.FacebookAuthProvider);
   }
+
+  /**
+   * Iniciar sesión con Apple ID
+  */
+  async loginWithApple(appleResponse)
+  {
+    const provider = new firebase.auth.OAuthProvider('apple.com');
+    const credential = provider.credential({
+      idToken: appleResponse.identityToken
+    });
+
+    console.log('credential:', credential);
+
+    const userCredential = await this.afAuth.signInWithCredential(credential);
+
+    console.log('After sign in: ', userCredential);
+    alert('User given data: ' + userCredential);
+    //Guardar en la base de datos 
+    //this.updateUserData(userCredential.user, appleResponse.givenName, appleResponse.familyName);
+  }
+
+  async updateUserData(userApple, firstname, lastname) {
+    const userRef: AngularFirestoreDocument = this.afs.doc(`users/${userApple.id}`);
+    let data = {
+      email: userApple.email
+    };
+
+    if (firstname) {
+      data['first_name'] = firstname;
+    }
+
+    if (lastname) {
+      data['last_name'] = lastname;
+    }
+
+    return userRef.set(data, {merge: true});
+  }
+
 
   /**
    * Registra un usuario en firebase. 

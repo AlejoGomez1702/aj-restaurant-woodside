@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
+import { SignInWithApple, AppleSignInResponse, AppleSignInErrorResponse, ASAuthorizationAppleIDRequest } from '@ionic-native/sign-in-with-apple/ngx';
 
 @Component({
   selector: 'app-auth',
@@ -20,9 +21,12 @@ export class AuthPage implements OnInit
   public showPassword: boolean;
   public passwordToggleIcon: string;
 
+  // Variable de verificación de plataforma (Andorid | IOS) default -> false
+  showAppleSignIn = true;
   constructor(
+    private signInWithApple: SignInWithApple,
     private authService: AuthService,
-    private router: Router 
+    private router: Router
   ) 
   { 
     this.showPassword = false;
@@ -31,6 +35,8 @@ export class AuthPage implements OnInit
 
   ngOnInit() 
   {
+    //Verifica cual si la plataforma es ios para mostrar el log in con apple
+    //this.showAppleSignIn = device.platform === 'ios';
   }
 
   /**
@@ -64,6 +70,32 @@ export class AuthPage implements OnInit
   {
     this.authService.loginWithFacebook();
   }
+
+  /**
+   * Iniciar sesión con Apple
+   */
+  /**
+   * Iniciar sesión con apple
+   */
+  openAppleSignIn() {
+    this.signInWithApple.signin({
+       requestedScopes: [
+         ASAuthorizationAppleIDRequest.ASAuthorizationScopeFullName,
+         ASAuthorizationAppleIDRequest.ASAuthorizationScopeEmail
+       ]
+     })
+     .then((res: AppleSignInResponse) => {
+       // https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user
+       alert('Send token to apple for verification: ');
+       console.log(res.identityToken);
+       this.authService.loginWithApple(res);
+     })
+     .catch((error: AppleSignInErrorResponse) => {
+       alert('El error fue: ' + error);
+       console.error(error);
+     });
+     //this.authService.appleSignIng();
+   }
 
   /**
    * Permite mostrar o no la contraseña ingresada por el usuario.
