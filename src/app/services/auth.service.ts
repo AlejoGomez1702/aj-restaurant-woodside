@@ -81,9 +81,6 @@ export class AuthService
     }).catch((error) => {
         console.log(error)
     });
-    // return this.authLogin(new auth.GoogleAuthProvider);
-
-    // return this.authLogin(new auth.GoogleAuthProvider);
   }
 
   /**
@@ -101,7 +98,6 @@ export class AuthService
     }).catch((error) => {
         console.log(error)
     });
-    // return this.authLogin(new auth.FacebookAuthProvider);
   }
 
   /**
@@ -117,11 +113,17 @@ export class AuthService
     console.log('credential:', credential);
 
     const userCredential = await this.afAuth.signInWithCredential(credential);
-
-    console.log('After sign in: ', userCredential);
-    alert('User given data: ' + userCredential);
-    //Guardar en la base de datos 
-    //this.updateUserData(userCredential.user, appleResponse.givenName, appleResponse.familyName);
+    if(userCredential)
+    {
+      //Guardar en la base de datos 
+      this.updateUserData(userCredential.user, appleResponse.givenName, appleResponse.familyName);
+      this.router.navigate(['/shopping-cart']);   
+    }
+    else
+    {
+      console.log('Error en la autenticación con apple');
+      this.router.navigate(['/shopping-cart']);   
+    }
   }
 
   async updateUserData(userApple, firstname, lastname) {

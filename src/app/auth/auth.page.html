@@ -16,7 +16,7 @@
     <ion-button color="blue-facebook" expand="block" (click)="loginWithFacebook()">
       <ion-icon slot="start" name="logo-facebook"></ion-icon>
       <ion-text color="white" class="ion-text-capitalize">
-        <h6>Continue With Facebook</h6>
+        <h6>Sign in with Facebook</h6>
       </ion-text>      
     </ion-button>
   </div>
@@ -25,7 +25,7 @@
     <ion-button color="danger" expand="block" (click)="loginWithGoogle()">
       <ion-icon slot="start" name="logo-google"></ion-icon>
       <ion-text color="white" class="ion-text-capitalize">
-        <h6>Continue With Google</h6>
+        <h6>Sign in with Google</h6>
       </ion-text>       
     </ion-button>
   </div>
@@ -33,7 +33,9 @@
   <div class="marg-btn">
     <ion-button color="dark" expand="block" (click)="openAppleSignIn()" *ngIf = "showAppleSignIn">
       <ion-icon expand="full" name="logo-apple" slot="start"></ion-icon>
-      Apple
+      <ion-text color="white" class="ion-text-capitalize">
+        <h6>Sign in with Apple</h6>
+      </ion-text>            
     </ion-button>
   </div>
 

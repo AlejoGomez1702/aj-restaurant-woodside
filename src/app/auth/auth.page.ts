@@ -86,13 +86,13 @@ export class AuthPage implements OnInit
      })
      .then((res: AppleSignInResponse) => {
        // https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user
-       alert('Send token to apple for verification: ');
-       console.log(res.identityToken);
+      //  alert('Send token to apple for verification: ');
+      //  console.log(res.identityToken);
        this.authService.loginWithApple(res);
      })
      .catch((error: AppleSignInErrorResponse) => {
-       alert('El error fue: ' + error);
-       console.error(error);
+        alert(error.code + ' ' + error.localizedDescription);
+        console.error(error);
      });
      //this.authService.appleSignIng();
    }
