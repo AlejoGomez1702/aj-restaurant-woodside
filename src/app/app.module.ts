@@ -24,7 +24,7 @@ import { CardNumberPipe } from './pipes/card-number.pipe';
 // Stripe (Payments)
 import { Stripe } from '@ionic-native/stripe/ngx';
 // Paypal (Payments)
-import { PayPal } from '@ionic-native/paypal/ngx';
+// import { PayPal } from '@ionic-native/paypal/ngx';
 
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
@@ -83,7 +83,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     StatusBar,
     SplashScreen,
     // Stripe,
-    PayPal,
+    // PayPal,
     HTTP,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
