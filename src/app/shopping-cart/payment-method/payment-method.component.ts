@@ -5,15 +5,15 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 // Payments with Stripe.
 // import { Stripe } from '@ionic-native/stripe/ngx';
-import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal/ngx';
+// import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal/ngx';
 
-import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { AlertController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HTTP } from '@ionic-native/http/ngx';
-import { computeStackId } from '@ionic/angular/directives/navigation/stack-utils';
+// import { computeStackId } from '@ionic/angular/directives/navigation/stack-utils';
 
 @Component({
   selector: 'app-payment-method',
@@ -59,7 +59,7 @@ export class PaymentMethodComponent implements OnInit
     private shoppingCartService: ShoppingCartService,
     private firebaseService: FirebaseService,
     // private stripe: Stripe,
-    private paypal: PayPal,
+    // private paypal: PayPal,
     private router: Router,
     public alertController: AlertController,
   ) 
@@ -86,81 +86,43 @@ export class PaymentMethodComponent implements OnInit
    */
   payWithPaypal() 
   {
-    let ammountNumber = (this.shoppingCartService.subtotal + this.shoppingCartService.taxTotal);
-    let ammount: string = ammountNumber.toString();
+    this.presentAwaitPaypal();
+    this.router.navigate(['woodside/tabs/tab1']);
 
-    this.paypal.init({
-      PayPalEnvironmentProduction: '',
-      PayPalEnvironmentSandbox: environment.paypalClientId
-    }).then(() => {
-      this.paypal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
-        acceptCreditCards: false,
-        languageOrLocale: 'en',
-        merchantName: 'Pollos Mario Woodside'
-      })).then(() => {
-        let payment = new PayPalPayment(ammount, 'USD', 'Order Online - Pollos Mario Woodside', 'sale');
-        this.paypal.renderSinglePaymentUI(payment).then(() => {
-          this.presentSaleSuccesfull(); 
-          this.router.navigate(['woodside/tabs/tab1']);   
-        }).catch(() => {
-          console.log('Errroorrr con paypal');
-          this.router.navigate(['woodside/tabs/tab1']);  
-        });
-      })
-    })
+    // let ammountNumber = (this.shoppingCartService.subtotal + this.shoppingCartService.taxTotal);
+    // let ammount: string = ammountNumber.toString();
 
-
-
-    // this.stripe.setPublishableKey(environment.stripeKey);
-
-    // const numberCard: string = this.paymentForm.get('card_number').value;
-    // const dateData = this.paymentForm.get('expiry_date').value;
-    // // const correctDate = this.getMonthAndYearCard(dateData);
-    // const codeCvc: string = this.paymentForm.get('card_code').value;
-
-    // const dateInfo = new Date(dateData);
-    // // console.log('La fecha en vamos a veeerrr:');
-    // // console.log(dateInfo.getFullYear());
-    // // console.log(dateInfo.getMonth() + 1);
-
-    // const year: number = dateInfo.getFullYear(); 
-    // const month: number = dateInfo.getMonth() + 1;
-
-    //*************IMPORTANTE*************IMPORTANTE*************IMPORTANTE************* */
-    /**
-     * Información verdadera del usuario.
-     */
-    // this.cardDetails = {
-    //   number: numberCard,
-    //   expMonth: month,
-    //   expYear: year,
-    //   cvc: codeCvc
-    // };
-
-    // this.stripe.createCardToken(this.cardDetails)
-    //   .then(token => {
-    //     // console.log(token);
-    //     // Se multiplica por 100 porque la api de stripe acepta en centavos de dolar.
-    //     let ammount: number = (this.shoppingCartService.subtotal + this.shoppingCartService.taxTotal) * 100;
-    //     ammount = Math.round((ammount + Number.EPSILON) * 100) / 100; // Devolviendo solo 2 decimales.
-    //     this.makePayment(token.id, ammount)
-    //     .then((data) => {
-    //       console.log(data);
-    //       // this.shoppingCartService.refreshCart();  *********SOLUCIONAR*********
-    //       this.shoppingCartService.registerSale()
-    //       .then(() => {
-    //         // this.shoppingCartService.refreshCart();    // ***********solucionar
-    //         this.presentSaleSuccesfull(); 
-    //         this.router.navigate(['tabs/tab1']);   
-    //       }).catch((error) => {
-    //         console.log(error);
-    //       });
+    // this.paypal.init({
+    //   PayPalEnvironmentProduction: '',
+    //   PayPalEnvironmentSandbox: environment.paypalClientId
+    // }).then(() => {
+    //   this.paypal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
+    //     acceptCreditCards: false,
+    //     languageOrLocale: 'en',
+    //     merchantName: 'Pollos Mario Woodside'
+    //   })).then(() => {
+    //     let payment = new PayPalPayment(ammount, 'USD', 'Order Online - Pollos Mario Woodside', 'sale');
+    //     this.paypal.renderSinglePaymentUI(payment).then(() => {
+    //       this.presentSaleSuccesfull(); 
+    //       this.router.navigate(['woodside/tabs/tab1']);   
+    //     }).catch(() => {
+    //       console.log('Errroorrr con paypal');
+    //       this.router.navigate(['woodside/tabs/tab1']);  
     //     });
     //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //     this.router.navigate(['tabs/tab1']); 
-    //   });
+    // });
+  }
+
+  async presentAwaitPaypal()
+  {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Soon!',
+      message: 'At this moment you cannot pay with PayPal',
+
+    });
+
+    await alert.present();
   }
 
   /**
@@ -230,37 +192,6 @@ export class PaymentMethodComponent implements OnInit
       this.isCorrectAmmount = false;
     }
   }
-
-  /**
-   * Parsea la informacion del ion-datetime en un objeto entendible.
-   * @param date 
-   */
-  // getMonthAndYearCard(date: string): {month: number, year: number}
-  // {
-  //   console.log('EL año que me llega es: ');
-  //   console.log(date);
-  //   let month = '';
-  //   let year = '';
-
-  //   for (let i = 0; i < date.length; i++) {
-  //     const element = date.charAt[i];
-  //     if(i < 4)
-  //     {
-  //       year += date.charAt[i];
-  //     }else if(i < 7 && i != 4)
-  //     {
-  //       month += date.charAt[i];        
-  //     }else{
-  //       break;
-  //     }      
-  //   }
-
-  //   let expireMonth: number = +month;
-  //   let expireYear: number = +year;
-
-  //   return {month: expireMonth, year: expireYear};
-  // }
-
 
   showInfo()
   {
