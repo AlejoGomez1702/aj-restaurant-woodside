@@ -3,6 +3,8 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { SignInWithApple, AppleSignInResponse, AppleSignInErrorResponse, ASAuthorizationAppleIDRequest } from '@ionic-native/sign-in-with-apple/ngx';
+import { Plugins } from '@capacitor/core';
+const { Device } = Plugins;
 
 @Component({
   selector: 'app-auth',
@@ -23,6 +25,7 @@ export class AuthPage implements OnInit
 
   // Variable de verificación de plataforma (Andorid | IOS) default -> false
   showAppleSignIn = true;
+  
   constructor(
     private signInWithApple: SignInWithApple,
     private authService: AuthService,
@@ -33,10 +36,11 @@ export class AuthPage implements OnInit
     this.passwordToggleIcon = 'eye';
   }
 
-  ngOnInit() 
+  async ngOnInit() 
   {
+    const device = await Device.getInfo();
     //Verifica cual si la plataforma es ios para mostrar el log in con apple
-    //this.showAppleSignIn = device.platform === 'ios';
+    this.showAppleSignIn = device.platform === 'ios';
   }
 
   /**
@@ -77,7 +81,8 @@ export class AuthPage implements OnInit
   /**
    * Iniciar sesión con apple
    */
-  openAppleSignIn() {
+  openAppleSignIn() 
+  {
     this.signInWithApple.signin({
        requestedScopes: [
          ASAuthorizationAppleIDRequest.ASAuthorizationScopeFullName,
