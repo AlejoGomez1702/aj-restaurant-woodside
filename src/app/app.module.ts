@@ -82,7 +82,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     HttpClient,
     StatusBar,
     SplashScreen,
-    // Stripe,
+    Stripe,
     // PayPal,
     HTTP,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

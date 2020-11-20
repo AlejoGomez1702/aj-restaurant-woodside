@@ -36,6 +36,7 @@
     "cordova-plugin-sign-in-with-apple": "^0.1.2",
     "cordova-plugin-stripe": "^1.5.3",
     "firebase": "^7.17.1",
+    "firebase-functions": "^3.11.0",
     "firebaseui": "^4.6.0",
     "firebaseui-angular": "^5.0.0",
     "rxjs": "~6.5.1",

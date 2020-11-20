@@ -16,9 +16,9 @@ export const environment = {
       measurementId: "G-GS1LQRR9R8"
   },
 
-  stripeKey: 'pk_test_10V4EOZvv157iYvHC8wDWWzP00XfoXdFil',
+  stripeKey: 'pk_test_51HoxNCFVP4vmqhV33nGp0Fn1BYdk0Rxml45U38r6ARRG4ieVCPJI5XNkjol2Pu5TKf3ASP3nwaQHP4hLztr2jY8F00Ok1Mawuv',
 
-  paypalClientId: 'AWkTlCsx3XN40vr2epiqoBxHePXfTiwBWtwlFBC44puehPcVBYuzqAOBuFFJGbsT8u49gGLMtJ7UllGr'
+  //paypalClientId: 'AWkTlCsx3XN40vr2epiqoBxHePXfTiwBWtwlFBC44puehPcVBYuzqAOBuFFJGbsT8u49gGLMtJ7UllGr'
 };
 
 /*
